@@ -1,0 +1,84 @@
+/* CSS for Body and Background */
+body.login-page, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end; /* Move the form to the right side */
+    align-items: flex-start; /* Align the form to the top */
+    background-image: url('login.png'); /* Background image */
+    background-size: cover; /* Ensure the image covers the entire area */
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    font-family: 'Arial', sans-serif;
+}
+
+/* CSS for Login Form */
+.login-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    width: 450px; /* Adjusted width */
+    padding: 15px; /* Reduce padding */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    position: relative;
+    top: 30px; /* Move the form upwards */
+    right: 50px; /* Align form to the right */
+}
+
+/* Logo Heading */
+.login-logo h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Input Fields */
+.form-control {
+    border-radius: 30px;
+    height: 40px;
+    padding: 10px 20px;
+    box-shadow: none;
+}
+
+/* Input Icons */
+.input-group-text {
+    border-radius: 0 30px 30px 0;
+    background: #3498db;
+    color: white;
+    border: none;
+}
+
+/* Submit Button */
+.btn-block {
+    background: #3498db;
+    color: white;
+    border-radius: 30px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.btn-block:hover {
+    background: #2ecc71;
+    transition: background 0.3s;
+}
+
+/* Select Dropdown */
+.custom-select {
+    border-radius: 30px;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-box {
+        position: static; /* Reset position */
+        width: 90%; /* Expand width for smaller screens */
+        margin: 20px auto; /* Center the form for small screens */
+    }
+}

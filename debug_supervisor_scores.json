@@ -1,0 +1,20 @@
+{
+    "5513": {
+        "1": {
+            "criteria": "Commitment 1",
+            "total_score": 25
+        },
+        "2": {
+            "criteria": "Knowledge of Subject Matter",
+            "total_score": 25
+        },
+        "5": {
+            "criteria": "Management of Learning",
+            "total_score": 25
+        },
+        "4": {
+            "criteria": "Teaching for Independent Learning",
+            "total_score": 25
+        }
+    }
+}

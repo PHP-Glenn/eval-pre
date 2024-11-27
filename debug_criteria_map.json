@@ -1,0 +1,42 @@
+{
+    "1": {
+        "criteria": "Commitment 1",
+        "questions": [
+            "47",
+            "51",
+            "52",
+            "53",
+            "54"
+        ]
+    },
+    "2": {
+        "criteria": "Knowledge of Subject Matter",
+        "questions": [
+            "48",
+            "55",
+            "56",
+            "57",
+            "58"
+        ]
+    },
+    "5": {
+        "criteria": "Management of Learning",
+        "questions": [
+            "50",
+            "64",
+            "65",
+            "66",
+            "67"
+        ]
+    },
+    "4": {
+        "criteria": "Teaching for Independent Learning",
+        "questions": [
+            "59",
+            "60",
+            "61",
+            "62",
+            "63"
+        ]
+    }
+}
