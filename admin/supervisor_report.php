@@ -60,8 +60,8 @@ function ordinal_suffix($num) {
         </div>
     </div>
     <div class="text-right" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 20px;">
+    <button id="print-btn" class="btn btn-primary" style="display: none;" onclick="printReport()">Print</button>
     <button id="export-btn" class="btn btn-success" style="display: none;" onclick="exportToExcel()">Export to Excel</button>
-    <button id="print-btn" class="btn btn-primary" style="display: none;" onclick="printReport()">Print Report</button>
 </div>
 
 
@@ -77,7 +77,7 @@ function ordinal_suffix($num) {
                     <p style="font-size: 12px; margin: 0;">Qualitative Contribution Evaluation (QCE)</p>
                     <p style="font-size: 12px; margin: 0;">For Instructor, Assistant Professor, and Associate Professor</p>
                     <p style="font-size: 12px; margin: 0; font-weight: bold;">NINTH CYCLE</p>
-                    <p style="font-size: 12px; margin: 0;">July 1, 2019 - July 30, 2023</p>
+                    <p style="font-size: 12px; margin: 0;">August 1, 2019 - July 31, 2026</p>
                 </div>
                 <hr>
                 <table width="100%" style="border-collapse: collapse; margin-top: 20px;">
@@ -112,17 +112,23 @@ function ordinal_suffix($num) {
                                     <th>Teaching for Independent Learning</th>
                                     <th>Management of Learning</th>
                                     <th>Total</th>
-                                    <th>Average</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody id="supervisor-criteria-body"></tbody>
                             <tfoot>
-                                <tr style="font-weight: bold; background: #f9f9f9;">
-                                    <td>Overall</td>
-                                    <td colspan="4"></td>
-                                    <td id="overall-supervisor-total" class="text-center"></td>
-                                    <td id="overall-supervisor-average" class="text-center"></td>
-                                </tr>
+                            <tr style="font-weight: bold; background: #f9f9f9;">
+                            <td colspan="4"></td>
+                            <td>Grand Total</td>
+                            <td id="overall-supervisor-total" class="text-center"></td>
+            
+                            </tr>
+                            <tr style="font-weight: bold; background: #f9f9f9;">
+                            <td colspan="4"></td>
+                            <td>Overall Average</td>
+                            <td id="overall-supervisor-average" class="text-center"></td>
+                            </tr>
+                                
                             </tfoot>
                         </table>
                     </div>
@@ -241,7 +247,7 @@ function populateSupervisorEvaluation(resp) {
         const total = supervisorData.total || 0;
         const average = supervisorData.average || 0;
         row.append(`<td class="text-center">${total}</td>`);
-        row.append(`<td class="text-center">${average}</td>`);
+        
 
         supervisorBody.append(row);
     });

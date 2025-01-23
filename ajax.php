@@ -4,6 +4,7 @@ date_default_timezone_set("Asia/Manila");
 
 $action = $_GET['action'];
 include 'admin_class.php';
+include 'db_connect.php';
 $crud = new Action();
 if($action == 'login'){
 	$login = $crud->login();
@@ -182,6 +183,11 @@ if($action == 'get_supervisor_report'){
 }
 if($action == 'get_summary'){
 	$get = $crud->get_summary();
+	if($get)
+		echo $get;
+}
+if($action == 'filter_students'){
+	$get = $crud->filter_students();
 	if($get)
 		echo $get;
 }

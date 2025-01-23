@@ -221,7 +221,7 @@ Class Action {
 	function update_user(){
 		extract($_POST);
 		$data = "";
-		$type = array("","users","faculty_list","student_list");
+		$type = array("","users","faculty_list","student_list", "supervisor_list");
 	foreach($_POST as $k => $v){
 			if(!in_array($k, array('id','cpass','table','password')) && !is_numeric($k)){
 				
@@ -1090,6 +1090,57 @@ Class Action {
 			: 0;
 	
 		return json_encode($data);
+	}
+	public function filter_students() {
+		global $conn; // Make sure the connection is available globally
+	 
+		// Get the section_id from POST request
+		$section_id = isset($_POST['section_id']) ? $_POST['section_id'] : '';
+	 
+		// Fetch classes to map class IDs to class names
+		$class = array();
+		$classes = $conn->query("SELECT id, concat(curriculum, ' ', level, ' - ', section) as `class` FROM class_list");
+		while($row = $classes->fetch_assoc()) {
+			$class[$row['id']] = $row['class'];
+		}
+	 
+		// Build the query to filter students by section if provided
+		$condition = $section_id ? "WHERE class_id = '$section_id'" : "";
+		$query = "SELECT *, concat(firstname, ' ', lastname) as name FROM student_list $condition ORDER BY concat(firstname, ' ', lastname) ASC";
+	 
+		// Execute the query
+		$result = $conn->query($query);
+		if ($result->num_rows > 0) {
+			$i = 1;
+			$output = '';
+			
+			// Loop through the result and generate the HTML for the table rows
+			while ($row = $result->fetch_assoc()) {
+				$class_name = isset($class[$row['class_id']]) ? $class[$row['class_id']] : "N/A";
+				$output .= '<tr>
+								<th class="text-center">' . $i++ . '</th>
+								<td><b>' . $row['school_id'] . '</b></td>
+								<td><b>' . ucwords($row['name']) . '</b></td>
+								<td><b>' . $row['email'] . '</b></td>
+								<td><b>' . $class_name . '</b></td>
+								<td class="text-center">
+									<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										Action
+									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item view_student" href="javascript:void(0)" data-id="' . $row['id'] . '">View</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="./index.php?page=edit_student&id=' . $row['id'] . '">Edit</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item delete_student" href="javascript:void(0)" data-id="' . $row['id'] . '">Delete</a>
+									</div>
+								</td>
+							</tr>';
+			}
+			return $output; // Return the generated HTML for the filtered students
+		} else {
+			return '<tr><td colspan="6" class="text-center">No students found.</td></tr>';
+		}
 	}
 	
 };	

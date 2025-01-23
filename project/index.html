@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tree View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title animate__animated animate__fadeIn">File Explorer</h1>
+        <div class="tree-container">
+            <ul class="tree">
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <i class="fas fa-folder"></i>
+                        <span>Documents</span>
+                    </div>
+                    <ul>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <i class="fas fa-file-alt"></i>
+                                <span>report.pdf</span>
+                            </div>
+                        </li>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                            </div>
+                            <ul>
+                                <li class="tree-item">
+                                    <div class="tree-content">
+                                        <i class="fas fa-file-code"></i>
+                                        <span>index.html</span>
+                                    </div>
+                                </li>
+                                <li class="tree-item">
+                                    <div class="tree-content">
+                                        <i class="fas fa-file-code"></i>
+                                        <span>styles.css</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="tree-item">
+                    <div class="tree-content">
+                        <i class="fas fa-folder"></i>
+                        <span>Pictures</span>
+                    </div>
+                    <ul>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <i class="fas fa-image"></i>
+                                <span>vacation.jpg</span>
+                            </div>
+                        </li>
+                        <li class="tree-item">
+                            <div class="tree-content">
+                                <i class="fas fa-image"></i>
+                                <span>family.jpg</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

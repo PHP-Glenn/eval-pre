@@ -39,7 +39,7 @@ $academic_status = isset($_SESSION['academic']['status']) ? $astat[$_SESSION['ac
         <a href="./index.php?page=faculty_list" class="small-box bg-light shadow-sm border">
             <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM faculty_list")->num_rows; ?></h3>
-                <p>Total Faculties</p>
+                <p>Total Faculty Member</p>
             </div>
             <div class="icon">
                 <i class="fa fa-user-friends"></i>

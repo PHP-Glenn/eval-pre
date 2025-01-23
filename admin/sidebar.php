@@ -9,65 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   
   <!-- Custom Sidebar CSS -->
-  <style>
-    /* General Sidebar Styling */
-    .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
-        background-color: #007bff; /* Active link background */
-        color: white; /* Active link text */
-    }
 
-    .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link {
-        color: #b8c7ce; /* Default link color */
-    }
-
-    .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
-        background-color: #343a40; /* Hover background */
-        color: white; /* Hover text */
-    }
-
-    /* Restore Default Icon Styling */
-    .nav-icon {
-        color: inherit; /* Restore default FontAwesome icon color */
-    }
-
-    /* Tree view submenu items styling */
-    .nav-treeview .nav-link {
-        padding-left: 30px; /* Indent submenu items */
-        font-size: 14px;
-    }
-
-    .nav-treeview .nav-icon {
-        font-size: 12px; /* Smaller icons for sub-items */
-    }
-
-    .nav-treeview .nav-link:hover {
-        background-color: #495057; /* Darker background for sub-items on hover */
-    }
-
-    /* Customizing Active State */
-    .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
-        font-weight: bold;
-        border-left: 3px solid #007bff;
-        background-color: #1e90ff; /* Active background */
-        color: white;
-    }
-
-    /* Dropdown styles */
-    .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link {
-        background: #343a40; /* Dark background for dropdowns */
-        color: #c2c7d0; /* Light text */
-    }
-
-    .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link:hover {
-        background: #495057; /* Hover color */
-        color: white; /* Hover text color */
-    }
-
-    /* Slight indentation for submenu */
-    .nav-treeview .nav-item {
-        padding-left: 15px;
-    }
-  </style>
 </head>
 <body>
 
@@ -128,7 +70,7 @@
             <a href="#" class="nav-link nav-edit_faculty">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
-                Faculties
+                Faculty
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -226,13 +168,17 @@
             <p>Summary Sheet</p>
         </a>
     </li>
-
-  
-  
+    
 </ul>
-
-
+   <!-- Academic Cycle Summary
+<li class="nav-item dropdown">
+            <a href="./index.php?page=academic_cycle" class="nav-link nav-academic_cycle">
+              <i class="nav-icon fas fa-book"></i>
+              <p>Academic Cycle</p>
+            </a>
+          </li>
         </ul>
+        -->
       </nav>
     </div>
 </aside>
@@ -256,6 +202,11 @@
       }
     }
   });
+    // Toggle Sidebar visibility
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.main-sidebar');
+      sidebar.classList.toggle('open');
+    }
 </script>
 
 </body>

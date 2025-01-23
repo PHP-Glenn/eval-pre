@@ -190,7 +190,7 @@ $selected_subject = 'N/A';
 		if(<?php echo empty($rid) ? 1 : 0 ?> == 1)
 			uni_modal("Information","<?php echo $_SESSION['login_view_folder'] ?>done.php")
 	})
-$(document).ready(function() {
+    $(document).ready(function() {
     function updateCriteriaTotals() {
         $('.criteria-total').each(function() {
             let criteriaId = $(this).data('criteria'), total = 0;
@@ -203,8 +203,6 @@ $(document).ready(function() {
             $(this).text(total);
         });
     }
-
-  
 
     function updateTotalScore() {
         let totalScore = 0;
@@ -221,6 +219,23 @@ $(document).ready(function() {
 
     $('#manage-evaluation').submit(function(e) {
         e.preventDefault();
+
+        // Validation: Check if all questions are answered
+        let allAnswered = true;
+        $('input[name^="rate"]').each(function() {
+            const questionId = $(this).attr('name').match(/\d+/)[0];
+            if (!$(`input[name="rate[${questionId}]"]:checked`).length) {
+                allAnswered = false;
+                return false; // Break loop
+            }
+        });
+
+        if (!allAnswered) {
+            alert("Please provide a rating for all questions before submitting.");
+            return false;
+        }
+
+        // If validation passes, proceed with submission
         $.ajax({
             url: 'ajax.php?action=save_evaluation',
             method: 'POST',
@@ -237,4 +252,5 @@ $(document).ready(function() {
     updateCriteriaTotals();
     updateTotalScore();
 });
+
 </script>

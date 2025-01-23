@@ -9,19 +9,19 @@
 					<div class="col-md-6 border-right">
 						<div class="form-group">
 							<label for="" class="control-label">ID Number</label>
-							<input type="text" name="school_id" class="form-control form-control-sm" required value="<?php echo isset($school_id) ? $school_id : '' ?>">
+							<input type="number" name="school_id" class="form-control form-control-sm" required value="<?php echo isset($school_id) ? $school_id : '' ?>">
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">First Name</label>
-							<input type="text" name="firstname" class="form-control form-control-sm" required value="<?php echo isset($firstname) ? $firstname : '' ?>">
+							<input type="text" name="firstname" class="form-control form-control-sm" required value="<?php echo isset($firstname) ? $firstname : '' ?>" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Middle Name</label>
-							<input type="text" name="middle_name" class="form-control form-control-sm" required value="<?php echo isset($middle_name) ? $middle_name : '' ?>">
+							<input type="text" name="middle_name" class="form-control form-control-sm" required value="<?php echo isset($middle_name) ? $middle_name : '' ?>" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Last Name</label>
-							<input type="text" name="lastname" class="form-control form-control-sm" required value="<?php echo isset($lastname) ? $lastname : '' ?>">
+							<input type="text" name="lastname" class="form-control form-control-sm" required value="<?php echo isset($lastname) ? $lastname : '' ?>" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
 						</div>
 						<div class="form-group">
 							<label for="" class="control-label">Academic Rank</label>

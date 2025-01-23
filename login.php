@@ -32,11 +32,37 @@ if (isset($_SESSION['login_id'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('login.png'); /* Use the background image */
+            background-image: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('asd.jpg'); /* Use the background image */
             background-size: cover;
             background-position: center;
             font-family: 'Arial', sans-serif;
+            
         }
+
+        #topHeader {
+    width: 100%;
+    height: 60px; /* Set a fixed height for the header */
+    -webkit-box-shadow: 0px 15px 35px 0px rgba(107, 90, 107, 1);
+    -moz-box-shadow: 0px 15px 35px 0px rgba(107, 90, 107, 1);
+    box-shadow: 0px 15px 35px 0px rgba(107,90,107,0.5);
+    background-color: #00274D;
+    font-family: "Trebuchet MS";
+    font-size: 28px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 60px; /* Vertically centers the text */
+    position: fixed; /* Makes the header stay at the top when scrolling */
+    top: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+}
+
+.tag {
+    font-family: "Segoe UI";
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: normal;
+}
 
         .login-box {
             background-color: rgba(115, 115, 115, 0.6); /* Slightly whiter transparent background */
@@ -59,6 +85,9 @@ if (isset($_SESSION['login_id'])) {
 </head>
 
 <body class="hold-transition login-page">
+<div id="topHeader">
+    <span class="tag">FACULTY EVALUATION SYSTEM</span>
+</div>
     <div class="login-box">
         
         <div class="card">
@@ -95,7 +124,7 @@ if (isset($_SESSION['login_id'])) {
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <a href="register.php"> Register here.</a>
+                               <small> <a href="register.php"> Click here to register here.</a></small>
                                 </div>
                            
                         </div>

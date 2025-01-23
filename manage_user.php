@@ -2,7 +2,7 @@
 include('db_connect.php');
 session_start();
 if(isset($_GET['id'])){
-$type = array("","users","faculty_list","student_list");
+$type = array("","users","faculty_list","student_list", "supervisor_list");
 $user = $conn->query("SELECT * FROM {$type[$_SESSION['login_type']]} where id =".$_GET['id']);
 foreach($user->fetch_array() as $k =>$v){
 	$meta[$k] = $v;

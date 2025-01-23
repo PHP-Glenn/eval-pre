@@ -7,6 +7,22 @@
 			</div>
 		</div>
 		<div class="card-body">
+			<!-- Filter by Section -->
+			<div class="form-group">
+				<label for="section_filter">Filter by Section:</label>
+				<select id="section_filter" class="form-control">
+					<option value="">All Sections</option>
+					<?php
+					// Fetch classes to populate the filter
+					$classes = $conn->query("SELECT id, concat(curriculum, ' ', level, ' - ', section) as `class` FROM class_list");
+					while ($row = $classes->fetch_assoc()):
+					?>
+						<option value="<?php echo $row['id']; ?>"><?php echo $row['class']; ?></option>
+					<?php endwhile; ?>
+				</select>
+			</div>
+
+			<!-- Student Table -->
 			<table class="table tabe-hover table-bordered" id="list">
 				<thead>
 					<tr>
@@ -18,16 +34,19 @@
 						<th>Action</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="student_table_body">
 					<?php
+					// Initial query to fetch all students
 					$i = 1;
+
 					$class= array();
-					$classes = $conn->query("SELECT id,concat(curriculum,' ',level,' - ',section) as `class` FROM class_list");
-					while($row=$classes->fetch_assoc()){
+					$classes = $conn->query("SELECT id, concat(curriculum, ' ', level, ' - ', section) as `class` FROM class_list");
+					while($row = $classes->fetch_assoc()){
 						$class[$row['id']] = $row['class'];
 					}
-					$qry = $conn->query("SELECT *,concat(firstname,' ',lastname) as name FROM student_list order by concat(firstname,' ',lastname) asc");
-					while($row= $qry->fetch_assoc()):
+
+					$qry = $conn->query("SELECT *, concat(firstname, ' ', lastname) as name FROM student_list ORDER BY concat(firstname, ' ', lastname) ASC");
+					while($row = $qry->fetch_assoc()):
 					?>
 					<tr>
 						<th class="text-center"><?php echo $i++ ?></th>
@@ -54,31 +73,54 @@
 		</div>
 	</div>
 </div>
+
 <script>
 	$(document).ready(function(){
-	$('.view_student').click(function(){
-		uni_modal("<i class='fa fa-id-card'></i> student Details","<?php echo $_SESSION['login_view_folder'] ?>view_student.php?id="+$(this).attr('data-id'))
-	})
-	$('.delete_student').click(function(){
-	_conf("Are you sure to delete this student?","delete_student",[$(this).attr('data-id')])
-	})
-		$('#list').dataTable()
-	})
-	function delete_student($id){
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=delete_student',
-			method:'POST',
-			data:{id:$id},
-			success:function(resp){
-				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
-					setTimeout(function(){
-						location.reload()
-					},1500)
+		// Filter students by section
+		$('#section_filter').change(function(){
+			var section_id = $(this).val();
+			filterStudents(section_id);
+		});
 
+		// Function to fetch and display students based on selected section
+		function filterStudents(section_id) {
+			$.ajax({
+				url: 'ajax.php?action=filter_students',
+				method: 'POST',
+				data: { section_id: section_id },
+				success: function(response) {
+					$('#student_table_body').html(response);
+				}
+			});
+		}
+
+		// Existing functionality
+		$('.view_student').click(function(){
+			uni_modal("<i class='fa fa-id-card'></i> student Details", "<?php echo $_SESSION['login_view_folder'] ?>view_student.php?id="+$(this).attr('data-id'))
+		});
+
+		$('.delete_student').click(function(){
+			_conf("Are you sure to delete this student?", "delete_student", [$(this).attr('data-id')])
+		});
+
+		$('#list').dataTable();
+	});
+
+	// Delete student function
+	function delete_student($id){
+		start_load();
+		$.ajax({
+			url: 'ajax.php?action=delete_student',
+			method: 'POST',
+			data: { id: $id },
+			success: function(resp){
+				if(resp == 1){
+					alert_toast("Data successfully deleted", 'success');
+					setTimeout(function(){
+						location.reload();
+					}, 1500);
 				}
 			}
-		})
+		});
 	}
 </script>

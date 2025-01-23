@@ -101,39 +101,39 @@ header("Expires: 0");
 <table border="1" style="border-collapse: collapse; width: 100%;">
     <thead>
         <tr>
-            <th colspan="7" style="background-color: #f2f2f2; font-weight: bold; text-align: center;">Student Evaluation Report</th>
+            <th colspan="6" style="background-color: #f2f2f2; font-weight: bold; text-align: center;">Student Evaluation Report</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">Zamboanga State Polytechnic State University</th>
+            <th colspan="6" style="text-align: center;">Zamboanga State Polytechnic State University</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">R.T. Lim Boulevard, Zamboanga City</th>
+            <th colspan="6" style="text-align: center;">R.T. Lim Boulevard, Zamboanga City</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">National Budget Circular No. 461</th>
+            <th colspan="6" style="text-align: center;">National Budget Circular No. 461</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">Qualitative Contribution Evaluation (QCE)</th>
+            <th colspan="6" style="text-align: center;">Qualitative Contribution Evaluation (QCE)</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">Ninth Cycle</th>
+            <th colspan="6" style="text-align: center;">Ninth Cycle</th>
         </tr>
         <tr>
-            <th colspan="7" style="text-align: center;">July 1, 2019 - July 30, 2023</th>
+            <th colspan="6" style="text-align: center;">July 1, 2019 - July 30, 2023</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>Name of Faculty:</strong></td>
-            <td colspan="6"><?php echo $faculty_name; ?></td>
+            <td colspan="5"><?php echo $faculty_name; ?></td>
         </tr>
         <tr>
             <td><strong>Academic Year:</strong></td>
-            <td colspan="6"><?php echo $academic_year . ' ' . $semester_with_suffix . ' Semester'; ?></td>
+            <td colspan="5"><?php echo $academic_year . ' ' . $semester_with_suffix . ' Semester'; ?></td>
         </tr>
         <tr>
             <td><strong>Academic Rank:</strong></td>
-            <td colspan="6"><?php echo $academic_rank; ?></td>
+            <td colspan="5"><?php echo $academic_rank; ?></td>
         </tr>
     </tbody>
 </table>
@@ -146,7 +146,7 @@ header("Expires: 0");
                 <th><?php echo $criteria['criteria']; ?></th>
             <?php endforeach; ?>
             <th>Total</th>
-            <th>Average</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -157,22 +157,24 @@ header("Expires: 0");
                     <td><?php echo $scores[$criteria_id]['total_score'] ?? 0; ?></td>
                 <?php endforeach; ?>
                 <td><?php echo $scores['total']; ?></td>
-                <td><?php echo $scores['average']; ?></td>
+                
             </tr>
         <?php endforeach; ?>
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="<?php echo count($criteria_map) + 1; ?>" style="text-align: right; font-weight: bold;">Overall Total:</td>
+            <td colspan="<?php echo count($criteria_map) + 1; ?>" style="text-align: right; font-weight: bold;">Grand Total:</td>
             <td><?php echo $overall_total; ?></td>
         </tr>
-        <tr>
-            <td colspan="<?php echo count($criteria_map) + 1; ?>" style="text-align: right; font-weight: bold;">Total Students Evaluated:</td>
-            <td><?php echo $row_count; ?></td>
-        </tr>
+        
         <tr>
             <td colspan="<?php echo count($criteria_map) + 1; ?>" style="text-align: right; font-weight: bold;">Overall Average:</td>
             <td><?php echo $overall_average; ?></td>
+        </tr>
+
+        <tr>
+            <td colspan="<?php echo count($criteria_map) + 1; ?>" style="text-align: right; font-weight: bold;">Total Students Evaluated:</td>
+            <td><?php echo $row_count; ?></td>
         </tr>
     </tfoot>
 </table>

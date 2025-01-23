@@ -59,12 +59,13 @@ $academic_semester = isset($_SESSION['academic']['semester']) ? $_SESSION['acade
                 <p class="mb-0">ZAMBOANGA CITY STATE POLYTECHNIC COLLEGE</p>
                 <p class="mb-0">Region IX, Zamboanga Peninsula</p>
                 <p class="mb-0">R.T. Lim Boulevard, Zamboanga City</p>
+                <br>
                 <p class="mb-0">National Budget Circular No. 461</p>
                 <p class="mb-0">Qualitative Contribution Evaluation (QCE)</p>
-                <p class="font-weight-bold mb-3">KEY RESULT AREA 1: INSTRUCTION</p>
-                <p class="mb-0">A. TEACHING EFFECTIVENESS</p>
+                <p class="font-weight-bold">KEY RESULT AREA 1: INSTRUCTION</p>
+                <p class="font-weight-bold">A. TEACHING EFFECTIVENESS</p>
                 <p class="mb-0">Faculty Performance Evaluation by Students and Supervisor</p>
-                <p class="mb-0">Evaluation Period: <u>July 1, 2019 to July 31, 2023</u></p>
+                <p class="mb-0">Evaluation Period: August 1, 2023 to July 31, 2026</p>
             </div>
             
             <hr>
@@ -107,8 +108,67 @@ $academic_semester = isset($_SESSION['academic']['semester']) ? $_SESSION['acade
                 </div>
               
             </form>
+            <div>
+    <div>
+        <p style="margin-left: 1rem;">Conforme:</p>
+        <br>
+        <div>
         </div>
+        <p id="conforme-name" style="margin-left: 5rem;"><strong>N/A</strong></p>
+        <p style="margin-left: 5rem;">Name and Signature of the Ratee</p>
+        <p style="margin-left: 5rem;">Date:______________</p>
     </div>
+    <br>
+    <p style="margin-left: 1rem;">Noted By:</p>
+    <br>
+    <div>
+        <p style="margin-left: 5rem;">
+        <strong id="noted-by-name">ADRIAN B. MARTIN</strong>
+        <button id="edit-noted-by" style="border: none; background: none; cursor: pointer;">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
+        </p>
+        <p style="margin-left: 5rem;">Dean, College of Information and Computing Science</p>
+        <p style="margin-left: 5rem;">Date:______________</p>
+
+        <script>
+    // Functionality to edit the "Noted By" name
+    document.getElementById('edit-noted-by').addEventListener('click', function () {
+        const notedByName = document.getElementById('noted-by-name');
+        const currentName = notedByName.innerText;
+        
+        // Replace the text with an input field
+        notedByName.outerHTML = `
+            <input type="text" id="noted-by-input" class="form-control" style="display: inline-block; width: auto;" value="${currentName}">
+        `;
+        
+        const notedByInput = document.getElementById('noted-by-input');
+
+        // Focus the input field
+        notedByInput.focus();
+
+        // Save changes on blur or when Enter is pressed
+        notedByInput.addEventListener('blur', function () {
+            updateNotedByName(notedByInput.value);
+        });
+
+        notedByInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                updateNotedByName(notedByInput.value);
+            }
+        });
+
+        function updateNotedByName(newName) {
+            // Revert the input back to a text element with the updated name
+            notedByInput.outerHTML = `
+                <strong id="noted-by-name">${newName}</strong>
+            `;
+        }
+    });
+</script>
+    </div>
+</div>
+
     <script>
     $('#faculty_id').change(function () {
         const facultyId = $(this).val();
@@ -122,6 +182,7 @@ $academic_semester = isset($_SESSION['academic']['semester']) ? $_SESSION['acade
                 success: function (response) {
                     if (response.status === 'success') {
                         $('#fname').text(response.data.faculty_name || 'N/A');
+                        $('#conforme-name').html(`<strong>${response.data.faculty_name || 'N/A'}</strong>`);
                         let summaryRows = '';
                         response.data.evaluators.forEach(evaluator => {
                             summaryRows += `
@@ -156,6 +217,7 @@ $academic_semester = isset($_SESSION['academic']['semester']) ? $_SESSION['acade
 
     function clearSummary() {
         $('#fname').text('N/A');
+        $('#conforme-name').html('<strong>N/A</strong>');
         $('#supervisor-summary-body').html('<tr><td colspan="4" class="text-center text-muted">No data available.</td></tr>');
         $('#total-weighted-average').text('N/A');
         $('#print-btn').hide();

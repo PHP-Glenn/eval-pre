@@ -1,0 +1,137 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --background-color: #f5f6fa;
+  --text-color: #2c3e50;
+  --hover-color: #e74c3c;
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.title {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.tree-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.tree {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tree ul {
+  list-style: none;
+  padding-left: 2rem;
+  margin: 0.5rem 0;
+  display: none;
+}
+
+.tree-item {
+  margin: 0.5rem 0;
+}
+
+.tree-content {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.tree-content:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.tree-content i {
+  margin-right: 0.5rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.tree-content:hover i {
+  color: var(--hover-color);
+  transform: scale(1.2);
+}
+
+.tree-content span {
+  font-size: 1rem;
+}
+
+/* Folder icon styles */
+.fa-folder {
+  color: var(--secondary-color);
+}
+
+/* File icon styles */
+.fa-file-alt,
+.fa-file-code,
+.fa-image {
+  color: var(--primary-color);
+}
+
+/* Active state for expanded items */
+.tree-item.active > ul {
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+
+.tree-item.active > .tree-content i.fa-folder::before {
+  content: "\f07c"; /* Changes to open folder icon */
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover animations for items */
+.tree-content:hover span {
+  transform: translateX(5px);
+  transition: transform var(--transition-speed) ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}

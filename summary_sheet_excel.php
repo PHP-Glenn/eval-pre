@@ -1,11 +1,9 @@
 <?php
-// Include necessary files for database connection
 include 'db_connect.php';
 session_start();
 
-// Get the faculty ID from the query string
+// Validate the faculty ID
 $faculty_id = isset($_GET['fid']) ? intval($_GET['fid']) : 0;
-
 if ($faculty_id == 0) {
     die('Invalid faculty ID.');
 }
@@ -26,18 +24,11 @@ $summary_query = $conn->query("
     WHERE ev.faculty_id = $faculty_id
     GROUP BY ev.evaluator_name
 ");
-
-// Debugging: Check if query executed successfully
 if (!$summary_query) {
     die('Query Error (Evaluation Summary): ' . $conn->error);
 }
 
-// Debugging: Check if query returned rows
-if ($summary_query->num_rows == 0) {
-    die('No data available for the selected faculty. Debug Faculty ID: ' . $faculty_id);
-}
-
-// Process query results
+// Fetch evaluator data
 $evaluators = [];
 while ($row = $summary_query->fetch_assoc()) {
     $evaluators[] = $row;
@@ -51,8 +42,7 @@ foreach ($evaluators as $evaluator) {
 
 // Set headers for Excel download
 header("Content-Type: application/vnd.ms-excel");
-$export_filename = "Evaluation_Summary_Report_" . str_replace(' ', '_', $faculty_name) . "_" . date('Y-m-d') . ".xls";
-header("Content-Disposition: attachment; filename=$export_filename");
+header("Content-Disposition: attachment; filename=Evaluation_Summary_{$faculty_name}_" . date('Y-m-d') . ".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
@@ -64,19 +54,8 @@ header("Expires: 0");
             <th colspan="4" style="background-color: #f2f2f2; font-weight: bold; text-align: center;">Faculty Evaluation Summary</th>
         </tr>
         <tr>
-            <th colspan="4" style="text-align: center;">Zamboanga City State Polytechnic College</th>
-        </tr>
-        <tr>
-            <th colspan="4" style="text-align: center;">Region IX, Zamboanga Peninsula</th>
-        </tr>
-        <tr>
             <th colspan="4" style="text-align: center;">Faculty: <?php echo htmlspecialchars($faculty_name, ENT_QUOTES, 'UTF-8'); ?></th>
         </tr>
-        <tr>
-            <th colspan="4" style="text-align: center;">Evaluation Period: <u>July 1, 2019 to July 31, 2023</u></th>
-        </tr>
-    </thead>
-    <thead>
         <tr>
             <th style="width: 40%;">Evaluator</th>
             <th style="width: 20%;">Average Rating</th>
@@ -85,14 +64,20 @@ header("Expires: 0");
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($evaluators as $evaluator): ?>
+        <?php if (!empty($evaluators)): ?>
+            <?php foreach ($evaluators as $evaluator): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($evaluator['evaluator_name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo number_format($evaluator['average_rating'], 2); ?></td>
+                    <td><?php echo number_format($evaluator['total_weight'], 2); ?>%</td>
+                    <td><?php echo number_format($evaluator['equivalent_point'], 2); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
             <tr>
-                <td><?php echo htmlspecialchars($evaluator['evaluator_name'], ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><?php echo number_format($evaluator['average_rating'], 2); ?></td>
-                <td><?php echo number_format($evaluator['total_weight'], 2); ?>%</td>
-                <td><?php echo number_format($evaluator['equivalent_point'], 2); ?></td>
+                <td colspan="4" class="text-center text-muted">No data available.</td>
             </tr>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </tbody>
     <tfoot>
         <tr>
@@ -103,4 +88,3 @@ header("Expires: 0");
 </table>
 <?php
 exit;
-?>

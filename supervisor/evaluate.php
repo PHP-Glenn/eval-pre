@@ -15,6 +15,29 @@ function ordinal_suffix($num) {
 
 $faculty_id = isset($_GET['fid']) ? $_GET['fid'] : '';
 ?>
+<style>
+    .radio-inline {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px; /* Increase font size for better readability */
+}
+
+.radio-inline input[type="radio"] {
+    transform: scale(1.5); /* Increase the size of the radio button */
+    margin-right: 5px; /* Add space between the button and the label */
+    cursor: pointer; /* Change the cursor to a pointer for better user feedback */
+}
+
+.radio-inline label {
+    font-size: 16px; /* Increase font size for labels */
+    cursor: pointer; /* Ensure clicking the label selects the radio button */
+}
+
+/* Add spacing between each set of radio buttons */
+.text-center td {
+    padding: 8px 0;
+}
+</style>
 
 <h4>Faculties to be Evaluated:</h4>
 <div class="col-lg-12">

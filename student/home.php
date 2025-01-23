@@ -77,7 +77,7 @@ $evaluationSummary = $conn->query("
                                                     <tr>
                                                         <th>Criteria</th>
                                                         <th>Average Rating</th>
-                                                        <th>Total Reponses out of 20</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>';
@@ -86,7 +86,7 @@ $evaluationSummary = $conn->query("
                         echo '<tr>
                                 <td>' . $row['criteria'] . '</td>
                                 <td>' . number_format($row['average_rating'], 2) . '</td>
-                                <td>' . $row['total_responses'] . '</td>
+                                
                               </tr>';
                     }
                     if ($currentSubject !== null) {

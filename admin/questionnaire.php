@@ -3,7 +3,7 @@
     <div style="border: 1px solid #007bff; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <div style="padding: 10px; background-color: #007bff; color: white; display: flex; justify-content: space-between; align-items: center; border-top-left-radius: 5px; border-top-right-radius: 5px;">
             <h4 style="margin: 0;">Manage Questionaire</h4>
-            <a style="background-color: white; color: #007bff; padding: 5px 10px; border-radius: 3px; text-decoration: none; transition: background 0.3s;" class="new_academic" href="javascript:void(0)"><i class="fa fa-plus"></i> Add New</a>
+            
         </div>
         <div style="padding: 15px;">
             <table style="width: 100%; border-collapse: collapse;" id="list">
